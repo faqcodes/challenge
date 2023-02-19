@@ -14,19 +14,16 @@ public class PhoneEntity implements Phone {
 
   @Override
   public int getNumber() {
-    // TODO Auto-generated method stub
     return number;
   }
 
   @Override
   public int getCityCode() {
-    // TODO Auto-generated method stub
     return cityCode;
   }
 
   @Override
   public int getCountryCode() {
-    // TODO Auto-generated method stub
     return countryCode;
   }
 

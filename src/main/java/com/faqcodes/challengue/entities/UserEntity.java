@@ -2,6 +2,7 @@ package com.faqcodes.challengue.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class UserEntity implements User {
 
@@ -76,20 +77,25 @@ public class UserEntity implements User {
   }
 
   @Override
-  public boolean isIsactive() {
+  public boolean isActive() {
     return isactive;
   }
 
   @Override
-  public boolean isPasswordValid() {
-    // TODO Auto-generated method stub
-    return false;
+  public boolean isPasswordValid() {    
+    return !password.isBlank();
   }
 
   @Override
   public boolean isEmailValid() {
-    // TODO Auto-generated method stub
-    return false;
+    final var pattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+
+    return patternMatches(email, pattern);
   }
 
+  private boolean patternMatches(String email, String regex) {
+    return Pattern.compile(regex)
+        .matcher(email)
+        .matches();
+  }
 }

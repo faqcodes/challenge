@@ -23,7 +23,7 @@ public interface User {
 
   public List<Phone> getPhones();
 
-  public boolean isIsactive();
+  public boolean isActive();
 
   boolean isPasswordValid();
 
