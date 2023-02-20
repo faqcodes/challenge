@@ -3,6 +3,7 @@ package com.faqcodes.challengue.adapters.gateways.db;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,15 +41,20 @@ public class UserData {
   @Column(name = "password")
   private String password;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   @Column(name = "phones")
   private List<PhoneData> phones;
 
   @Column(name = "isactive")
   private boolean isactive;
 
+  public UserData() {
+    super();
+  }
+
   public UserData(String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastlogin, String token,
       String name, String email, String password, List<PhoneData> phones, boolean isactive) {
+    super();
     this.id = id;
     this.created = created;
     this.modified = modified;

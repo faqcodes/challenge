@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.faqcodes.challengue.adapters.gateways.SaveUser;
-import com.faqcodes.challengue.adapters.gateways.db.PhoneData;
-import com.faqcodes.challengue.adapters.gateways.db.UserData;
 import com.faqcodes.challengue.entities.CreatePhone;
 import com.faqcodes.challengue.entities.CreateUser;
 import com.faqcodes.challengue.entities.Phone;
