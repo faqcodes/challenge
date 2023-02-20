@@ -1,7 +1,8 @@
 package com.faqcodes.challengue.adapters.gateways;
 
-import com.faqcodes.challengue.adapters.gateways.db.UserDataModel;
+import com.faqcodes.challengue.adapters.gateways.db.UserData;
+import com.faqcodes.challengue.models.UserModel;
 
 public interface SaveUser {
-  boolean save(UserDataModel data);
+  boolean save(UserModel model);
 }

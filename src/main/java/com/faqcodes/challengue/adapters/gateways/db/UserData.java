@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class UserDataModel {
+public class UserData {
   @Id
   @Column(name = "id")
   // @GeneratedValue(strategy = GenerationType.UUID)
@@ -42,13 +42,13 @@ public class UserDataModel {
 
   @OneToMany
   @Column(name = "phones")
-  private List<PhoneDataModel> phones;
+  private List<PhoneData> phones;
 
   @Column(name = "isactive")
   private boolean isactive;
 
-  public UserDataModel(String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastlogin, String token,
-      String name, String email, String password, List<PhoneDataModel> phones, boolean isactive) {
+  public UserData(String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastlogin, String token,
+      String name, String email, String password, List<PhoneData> phones, boolean isactive) {
     this.id = id;
     this.created = created;
     this.modified = modified;
@@ -60,5 +60,4 @@ public class UserDataModel {
     this.phones = phones;
     this.isactive = isactive;
   }
-
 }

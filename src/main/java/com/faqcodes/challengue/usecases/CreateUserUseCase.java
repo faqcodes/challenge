@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.faqcodes.challengue.adapters.gateways.SaveUser;
-import com.faqcodes.challengue.adapters.gateways.db.PhoneDataModel;
-import com.faqcodes.challengue.adapters.gateways.db.UserDataModel;
+import com.faqcodes.challengue.adapters.gateways.db.PhoneData;
+import com.faqcodes.challengue.adapters.gateways.db.UserData;
 import com.faqcodes.challengue.entities.CreatePhone;
 import com.faqcodes.challengue.entities.CreateUser;
 import com.faqcodes.challengue.entities.Phone;
+import com.faqcodes.challengue.models.PhoneModel;
 import com.faqcodes.challengue.models.UserInputModel;
+import com.faqcodes.challengue.models.UserModel;
 import com.faqcodes.challengue.models.UserOutputModel;
 
 public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputModel> {
@@ -55,16 +57,16 @@ public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputMode
     //
 
     // Create Phone Data: map phone model to phone data
-    final var phonesData = new ArrayList<PhoneDataModel>();
+    final var phoneModel = new ArrayList<PhoneModel>();
     inputModel.getPhones().forEach(
-        phone -> phones.add(
-            createPhone.create(
+        phone -> phoneModel.add(
+            new PhoneModel(
                 phone.getNumber(),
                 phone.getCitycode(),
                 phone.getCountrycode())));
 
     // Create User Data
-    final var userData = new UserDataModel(
+    final var userData = new UserModel(
         id,
         user.getCreated(),
         user.getModified(),
@@ -72,8 +74,8 @@ public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputMode
         token,
         user.getName(),
         user.getEmail(),
+        phoneModel,
         user.getPassword(),
-        phonesData,
         user.isActive());
 
     // Save User

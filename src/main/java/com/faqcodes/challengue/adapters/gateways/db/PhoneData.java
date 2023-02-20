@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "phones")
-public class PhoneDataModel {
+public class PhoneData {
   @Id
   @Column(name = "number")
   private int number;
@@ -17,4 +17,10 @@ public class PhoneDataModel {
 
   @Column(name = "countrycode")
   private int countrycode;
+
+  public PhoneData(int number, int citycode, int countrycode) {
+    this.number = number;
+    this.citycode = citycode;
+    this.countrycode = countrycode;
+  }
 }
