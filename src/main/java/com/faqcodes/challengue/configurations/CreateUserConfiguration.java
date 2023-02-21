@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import com.faqcodes.challengue.adapters.gateways.SaveUser;
 import com.faqcodes.challengue.adapters.gateways.SaveUserGateway;
 import com.faqcodes.challengue.adapters.gateways.db.UserRepository;
+import com.faqcodes.challengue.adapters.presenters.CreateUserPresenter;
+import com.faqcodes.challengue.adapters.presenters.Presenter;
 import com.faqcodes.challengue.entities.CreatePhone;
 import com.faqcodes.challengue.entities.CreatePhoneEntity;
 import com.faqcodes.challengue.entities.CreateUser;
@@ -34,11 +36,18 @@ public class CreateUserConfiguration {
   }
 
   @Bean
+  Presenter<UserInputModel, UserOutputModel> presenter() {
+    return new CreateUserPresenter();
+  }
+
+  @Bean
   UseCase<UserInputModel, UserOutputModel> createUserUseCase(
       CreateUser createUser,
       CreatePhone createPhone,
-      SaveUser saveUser) {
-    return new CreateUserUseCase(createUser, createPhone, saveUser);
+      SaveUser saveUser,
+      Presenter<UserInputModel, UserOutputModel> presenter
+      ) {
+    return new CreateUserUseCase(createUser, createPhone, saveUser, presenter);
   }
 
 }

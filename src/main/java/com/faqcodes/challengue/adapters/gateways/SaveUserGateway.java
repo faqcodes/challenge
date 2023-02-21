@@ -16,7 +16,7 @@ public class SaveUserGateway implements SaveUser {
   }
 
   @Override
-  public boolean save(UserModel model) {
+  public boolean save(UserModel model) throws Exception {
 
     final var phoneData = new ArrayList<PhoneData>();
 
@@ -38,6 +38,9 @@ public class SaveUserGateway implements SaveUser {
         model.getPassword(),
         phoneData,
         model.isActive());
+
+    if (repository.existsByEmail(model.getEmail()))
+      throw new Exception("El correo ya se encuentra registrado");
 
     var user = repository.save(userData);
 

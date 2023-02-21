@@ -1,5 +1,7 @@
 package com.faqcodes.challengue.usecases;
 
+import com.faqcodes.challengue.models.ResponseMessage;
+
 public interface UseCase<T, U> {
-  U execute(T inputModel);
+  ResponseMessage<U> execute(T inputModel);
 }

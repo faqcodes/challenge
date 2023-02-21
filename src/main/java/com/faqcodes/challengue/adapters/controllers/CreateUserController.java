@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.faqcodes.challengue.models.ResponseMessage;
 import com.faqcodes.challengue.models.UserInputModel;
 import com.faqcodes.challengue.models.UserOutputModel;
 import com.faqcodes.challengue.usecases.UseCase;
@@ -24,7 +25,7 @@ public class CreateUserController {
   }
 
   @PostMapping("/signup")
-  public UserOutputModel signup(@RequestBody UserInputModel userInputModel) {
+  public ResponseMessage<UserOutputModel> signup(@RequestBody UserInputModel userInputModel) {
     logger.info(userInputModel);
 
     return createUserUseCase.execute(userInputModel);
