@@ -8,6 +8,8 @@ import com.faqcodes.challengue.adapters.gateways.SaveUserGateway;
 import com.faqcodes.challengue.adapters.gateways.db.UserRepository;
 import com.faqcodes.challengue.adapters.presenters.CreateUserPresenter;
 import com.faqcodes.challengue.adapters.presenters.Presenter;
+import com.faqcodes.challengue.adapters.security.JWTSecurityToken;
+import com.faqcodes.challengue.adapters.security.SecurityToken;
 import com.faqcodes.challengue.entities.CreatePhone;
 import com.faqcodes.challengue.entities.CreatePhoneEntity;
 import com.faqcodes.challengue.entities.CreateUser;
@@ -36,6 +38,11 @@ public class CreateUserConfiguration {
   }
 
   @Bean
+  SecurityToken securityToken() {
+    return new JWTSecurityToken();
+  }
+
+  @Bean
   Presenter<UserInputModel, UserOutputModel> presenter() {
     return new CreateUserPresenter();
   }
@@ -45,9 +52,10 @@ public class CreateUserConfiguration {
       CreateUser createUser,
       CreatePhone createPhone,
       SaveUser saveUser,
+      SecurityToken securityToken,
       Presenter<UserInputModel, UserOutputModel> presenter
       ) {
-    return new CreateUserUseCase(createUser, createPhone, saveUser, presenter);
+    return new CreateUserUseCase(createUser, createPhone, saveUser, securityToken, presenter);
   }
 
 }

@@ -1,10 +1,12 @@
 package com.faqcodes.challengue.usecases;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
 
 import com.faqcodes.challengue.adapters.gateways.SaveUser;
 import com.faqcodes.challengue.adapters.presenters.Presenter;
+import com.faqcodes.challengue.adapters.security.SecurityToken;
 import com.faqcodes.challengue.entities.CreatePhone;
 import com.faqcodes.challengue.entities.CreateUser;
 import com.faqcodes.challengue.entities.Phone;
@@ -19,16 +21,19 @@ public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputMode
   private final CreateUser createUser;
   private final CreatePhone createPhone;
   private final SaveUser repository;
+  private final SecurityToken securityToken;
   private final Presenter<UserInputModel, UserOutputModel> presenter;
 
   public CreateUserUseCase(
       CreateUser createUser,
       CreatePhone createPhone,
       SaveUser repository,
+      SecurityToken securityToken,
       Presenter<UserInputModel, UserOutputModel> presenter) {
     this.createUser = createUser;
     this.createPhone = createPhone;
     this.repository = repository;
+    this.securityToken = securityToken;
     this.presenter = presenter;
   }
 
@@ -38,8 +43,8 @@ public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputMode
     final var id = UUID.randomUUID().toString();
 
     // Get Token
-    //
-    final var token = "token";
+    final var claims = Map.of("uid", (Object) id); // add some claims
+    final var token = securityToken.generateToken(claims, inputModel.getEmail());
 
     // Create Phone Entity: map phone model to phone entity
     final var phones = new ArrayList<Phone>();
