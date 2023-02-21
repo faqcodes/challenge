@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<UserData, String> {
 
-  @Query(value="SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM USERS u WHERE email = :email", nativeQuery = true)
+  @Query(value="SELECT CASE WHEN COUNT(u.ID) > 0 THEN true ELSE false END FROM USERS u WHERE email = :email", nativeQuery = true)
   boolean existsByEmail(@Param("email") String email);
 
 }
