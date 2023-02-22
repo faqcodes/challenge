@@ -93,9 +93,9 @@ public class UserEntity implements User {
     return patternMatches(email, pattern);
   }
 
-  private boolean patternMatches(String email, String regex) {
+  public boolean patternMatches(String value, String regex) {
     return Pattern.compile(regex)
-        .matcher(email)
+        .matcher(value)
         .matches();
   }
 }

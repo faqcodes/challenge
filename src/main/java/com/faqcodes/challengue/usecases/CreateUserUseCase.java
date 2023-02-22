@@ -67,10 +67,23 @@ public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputMode
     // -----------------------------------------------
     // Validate User Entity Business Rules
     // -----------------------------------------------
+    if (!user.isPasswordValid()) {
+      return presenter.errorResponse("La contraseña no puede estar vacía", inputModel);
+    }
+
+    if (!user.isEmailValid()) {
+      return presenter.errorResponse("El correo electrónico no tiene el formato correcto", null);
+    }
 
     // -----------------------------------------------
     // Validate User Application Rules
     // -----------------------------------------------
+
+    // Validate password format
+    var isPasswordValid = user.patternMatches(inputModel.getPassword(), inputModel.getPasswordRegex());
+    if (!isPasswordValid) {
+      return presenter.errorResponse("La contraseña no tiene el formato correcto", null);
+    }
 
     // Create Phone Data: map phone model to phone data
     final var phoneModel = new ArrayList<PhoneModel>();

@@ -9,6 +9,16 @@ public class UserInputModel {
   private final String password;
   private final List<PhoneModel> phones;
 
+  private String passwordRegex;
+
+  public String getPasswordRegex() {
+    return passwordRegex;
+  }
+
+  public void setPasswordRegex(String value) {
+    this.passwordRegex = value;
+  }
+
   public String getName() {
     return name;
   }

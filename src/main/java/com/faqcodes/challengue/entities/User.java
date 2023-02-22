@@ -28,4 +28,6 @@ public interface User {
   boolean isPasswordValid();
 
   boolean isEmailValid();
+
+  boolean patternMatches(String value, String regex);
 }
