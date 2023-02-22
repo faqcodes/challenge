@@ -61,20 +61,23 @@ Se crean las entidades de negocio con sus reglas
 Se crea el caso de uso donde se crean las reglas de negocio de la aplicación 
 ![Application Bussines Rules](docs/images/002-sigunp-abr-a.png)
 
-Se crea el repositorio en H2
+Se crean las interfaces y clases que permiten crear y manejar el repositorio. Se utiliza JPA con H2
 ![Repository](docs/images/003-signup-repository.png)
 
 Se crea el controller que hace uso del caso de uso
 ![Controller](docs/images/004-signup-controller.png)
 
-Se crea el presenter que permite abstraer la respuesta del caso de uso
+Se crea el presenter que permite desacoplar la respuesta del caso de uso hacia las otras capas
 ![Presenter](docs/images/005-signup-presenter.png)
 
 Se genera el token JWT donde se desacopla su creación (otro ejemplo del uso del principio de Inversión de Dependencia)
 ![Token](docs/images/006-signup-token.png)
 
 
-TODO: Existen oportunidades de mejora desde que, por ejemplo, la entidad Phone no posee ninguna regla de negocio
+TODO: 
+Existen oportunidades de mejora desde que, por ejemplo, 
+- la entidad Phone no posee ninguna regla de negocio
+- la utilización de nuevas funciones según la versión de Java
 
 # Documentación
 
