@@ -1,23 +1,22 @@
 package com.faqcodes.challengue.adapters.controllers;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import com.faqcodes.challengue.models.ResponseMessage;
 import com.faqcodes.challengue.models.UserInputModel;
 import com.faqcodes.challengue.models.UserOutputModel;
 import com.faqcodes.challengue.usecases.UseCase;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class CreateUserController {
-
-  private static final Logger logger = LogManager.getLogger();
 
   @Value("${validation.passwordRegex}")
   String passwordRegex;
@@ -29,13 +28,23 @@ public class CreateUserController {
   }
 
   @PostMapping("/signup")
-  public ResponseMessage<UserOutputModel> signup(@RequestBody UserInputModel userInputModel) {
-    logger.info(userInputModel);
-
+  public ResponseEntity<?> signup(@RequestBody UserInputModel userInputModel) {
     // Se asigna validación de password Regex
     userInputModel.setPasswordRegex(passwordRegex);
 
-    return createUserUseCase.execute(userInputModel);
+    var response = createUserUseCase.execute(userInputModel);
+
+    if (response.getData() == null) {
+      return ResponseEntity.badRequest().body(response);
+    }
+
+    return ResponseEntity.created(URI.create("")).body(response.getData());
   }
 
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ResponseMessage<?>> handleException() {
+    var response = new ResponseMessage<>("Hubo un error al obtener el recurso", null);
+
+    return ResponseEntity.badRequest().body(response);
+  }
 }

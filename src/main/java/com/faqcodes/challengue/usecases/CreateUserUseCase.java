@@ -103,8 +103,8 @@ public class CreateUserUseCase implements UseCase<UserInputModel, UserOutputMode
         token,
         user.getName(),
         user.getEmail(),
-        phoneModel,
         user.getPassword(),
+        phoneModel,
         user.isActive());
 
     try {

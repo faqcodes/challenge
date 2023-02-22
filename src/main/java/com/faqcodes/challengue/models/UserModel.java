@@ -56,8 +56,8 @@ public class UserModel {
     return isactive;
   }
 
-  public UserModel(String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastlogin, String name,
-      String email, String password, List<PhoneModel> phones, String token, boolean isactive) {
+  public UserModel(String id, LocalDateTime created, LocalDateTime modified, LocalDateTime lastlogin, String token, String name,
+      String email, String password, List<PhoneModel> phones, boolean isactive) {
     this.id = id;
     this.created = created;
     this.modified = modified;
