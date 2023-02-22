@@ -12,9 +12,9 @@
 	</parent>
 
 	<groupId>com.faqcodes</groupId>
-	<artifactId>challengue</artifactId>
+	<artifactId>challenge</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>challengue</name>
+	<name>challenge</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
