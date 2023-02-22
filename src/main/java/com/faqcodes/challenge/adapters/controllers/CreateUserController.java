@@ -42,10 +42,10 @@ public class CreateUserController {
     return ResponseEntity.created(URI.create("")).body(response.getData());
   }
 
-  // @ExceptionHandler(Exception.class)
-  // public ResponseEntity<ResponseMessage<?>> handleException() {
-  //   var response = new ResponseMessage<>("Hubo un error al obtener el recurso", null);
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ResponseMessage<?>> handleException() {
+    var response = new ResponseMessage<>("Hubo un error al obtener el recurso", null);
 
-  //   return ResponseEntity.badRequest().body(response);
-  // }
+    return ResponseEntity.badRequest().body(response);
+  }
 }
